@@ -1,0 +1,58 @@
+{% load static %}
+<nav class="navbar navbar-light" style="background-color: #5b7a78">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'image/orthoreg.jpg' %}"width="30" height="30" 
+        class="d-inline-block align-top" alt="">
+      <span style="color:#48d1cc">Ortho</span><span style="color:#F5F5DC">REG</span>
+    </a>
+    {% with request.resolver_match.view_name as view_name %}
+      <ul class="nav nav-pills">
+        {% comment %} <li class="nav-item"> 
+          <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}"
+            href="{% url 'about:author' %}">Об авторе
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'about:tech' %}active{% endif %}"
+            href="{% url 'about:tech' %}">Технологии
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+          {% csrf_token %}
+          <li class="nav-item">
+            <a class="nav-link {% if view_name  == 'posts:post_create' %}active{% endif %}"
+              href="{% url 'posts:post_create' %}">Новая запись
+            </a>
+          </li> {% endcomment %}
+          {% if user.is_authenticated %}
+          {% csrf_token %}
+          <li class="nav-item">
+            <a class="nav-link link-light{% if view_name  == 'user:password_change' %}active menu-text-color{% endif %}"
+              href="{% url 'user:password_change' %}">Изменить пароль
+            </a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link link-light menu-text-color{% if view_name  == 'user:logout' %}active{% endif %}"
+              href="{% url 'user:logout' %}">Выйти
+            </a>
+          </li>
+          <li>     
+            Пользователь: {{ user.username }}
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link link-light{% if view_name  == 'user:login' %}active menu-text-color{% endif %}"
+              href="{% url 'user:login' %}">Войти
+            </a>
+          </li>
+          {% comment %} <li class="nav-item">
+            <a class="nav-link link-light{% if view_name  == 'user:signup' %}active{% endif %}"
+              href="{% url 'user:signup' %}">Регистрация
+            </a>
+          </li> пока что регистрация через админку{% endcomment %}
+        {% endif %}
+      </ul>
+    {% endwith %}
+  </div>
+</nav>

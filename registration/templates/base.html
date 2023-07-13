@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href=" {% static 'img/icon.svg type="image"' %}"> 
+    {% comment %} проверить как смотрится иконка {% endcomment %}
+    <meta name="msapplication-TileColor" content="#000">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> 
+      {% block title %} 
+        Заголовок базового шаблона
+      {% endblock %} 
+    </title>
+  </head>          
+  <body>       
+    <header>
+      {% include 'includes/header.html' %}
+    </header>
+    <main>
+      {% block content %}
+        Здесь должен быть контент
+      {% endblock %}
+    </main>
+  {% include 'includes/footer.html' %} 
+  </body>
+</html>
